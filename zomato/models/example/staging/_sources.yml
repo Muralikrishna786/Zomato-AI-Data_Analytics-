@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: raw
+    database: ZOMATO
+    schema: RAW
+    tables:
+      - name: restaurants
+        description: "This table contains information about restaurants, including their names, locations, cuisines, and ratings."
+
+      - name: reviews
+        description: "This table contains customer reviews for restaurants, including the review text and rating."
+
+      - name: users
+        description: "This table contains information about users who have submitted reviews, including their names and locations."
+
+      - name: orders
+        description: "This table contains information about orders placed at restaurants, including the order details and timestamps."
+
+      - name: order_items
+        description: "This table contains information about individual items included in restaurant orders."
+
+      - name: food
+        description: "This table contains information about different food items available at restaurants, including their names, descriptions, and prices."
+
+      - name: menu
+        description: "This table contains menu items, cuisines, prices, and restaurant-food relationships."
+
