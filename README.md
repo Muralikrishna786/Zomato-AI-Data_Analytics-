@@ -1,5 +1,5 @@
 # Zomato-AI-Data_Analytics-
-Zomato AI Data Analytics Platform
+**Zomato AI Data Analytics Platform**
 
 A complete end-to-end data engineering and AI analytics project built around Zomato-style restaurant, customer, food, order, and review data.
 
@@ -23,7 +23,7 @@ SQL generation from natural-language questions
 
 Production-style separation of RAW, STAGING, and analytical layers
 
-1. Project Overview
+**1. Project Overview**
 
 The platform takes raw Zomato data files, loads them into Snowflake, transforms them using dbt, enriches customer reviews using OpenAI, and provides an AI interface through Streamlit.
 
@@ -67,7 +67,7 @@ High-level workflow
                                     ▼
                          Natural Language Query
 
-2. Main Technologies
+**2. Main Technologies**
 
 Technology
 
@@ -113,7 +113,7 @@ Git/GitHub
 
 Version control
 
-3. Project Structure
+**3. Project Structure**
 
 Zomato-AI-Data_Analytics/
 │
@@ -143,7 +143,7 @@ Zomato-AI-Data_Analytics/
 
 The exact dbt subdirectories may vary depending on the current project files. The important architectural layers are RAW → STAGING → analytical models/marts → AI.
 
-4. Data Architecture
+**4. Data Architecture**
 
 RAW Layer
 
@@ -173,7 +173,7 @@ orders/
 order_items/
 reviews/
 
-5. Snowflake
+**5. Snowflake**
 
 Database
 
@@ -212,7 +212,7 @@ ZOMATO
 
 The exact final analytical schema depends on the dbt model configuration in the project.
 
-6. AWS S3 to Snowflake
+**6. AWS S3 to Snowflake**
 
 The Airflow DAG executes Snowflake COPY INTO statements.
 
@@ -234,7 +234,7 @@ reviews
 
 This provides automated ingestion from S3 into Snowflake.
 
-7. dbt Transformation Layer
+**7. dbt Transformation Layer**
 
 dbt is responsible for transforming raw Snowflake data into clean analytical models.
 
@@ -262,7 +262,7 @@ docker compose exec scheduler /opt/airflow/dbt_venv/bin/dbt debug `
   --project-dir /opt/airflow/dbt/zomato `
   --profiles-dir /opt/airflow/profiles
 
-Expected result:
+**Expected result:**
 
 All checks passed!
 
@@ -286,7 +286,7 @@ docker compose exec scheduler /opt/airflow/dbt_venv/bin/dbt build `
   --project-dir /opt/airflow/dbt/zomato `
   --profiles-dir /opt/airflow/profiles
 
-8. dbt Lineage
+**8. dbt Lineage**
 
 The project uses dbt model dependencies through ref().
 
@@ -321,7 +321,7 @@ RAW
  │
  └── reviews ───────> stg_reviews ──────> AI enrichment
 
-9. Apache Airflow
+**9. Apache Airflow**
 
 Airflow orchestrates the complete batch pipeline.
 
@@ -343,7 +343,7 @@ Catchup:
 
 False
 
-10. Airflow Pipeline
+**10. Airflow Pipeline**
 
 The DAG contains four major tasks:
 
@@ -396,7 +396,7 @@ Command:
 
 dbt build --select tag:ai
 
-11. Airflow DAG Code
+**11. Airflow DAG Code**
 
 The core DAG pattern is:
 
@@ -412,7 +412,7 @@ Reviews are enriched using OpenAI.
 
 AI dbt models are built last.
 
-12. Docker
+**12. Docker**
 
 The Airflow environment is containerized using Docker Compose.
 
@@ -446,7 +446,7 @@ Restart:
 docker compose down
 docker compose up -d
 
-13. Airflow UI
+**13. Airflow UI**
 
 Open:
 
@@ -470,7 +470,7 @@ Inspect task dependencies
 
 Monitor failures
 
-14. OpenAI Review Enrichment
+**14. OpenAI Review Enrichment**
 
 The project uses OpenAI to enrich Zomato reviews.
 
@@ -506,7 +506,7 @@ Inside Docker:
 
 /opt/airflow/ai/enrich_reviews.py
 
-15. Running Review Enrichment Locally
+**15. Running Review Enrichment Locally**
 
 Activate the project virtual environment if required:
 
@@ -524,7 +524,7 @@ If the script is executed from the AI directory:
 
 python enrich_reviews.py
 
-16. Environment Variables
+**16. Environment Variables**
 
 Secrets should never be hard-coded into source code or committed to Git.
 
@@ -567,7 +567,7 @@ Alternatively, maintain the Compose environment file in the airflow directory.
 
 Never commit API keys or passwords to GitHub.
 
-17. Streamlit AI Application
+**17. Streamlit AI Application**
 
 The project contains Streamlit applications for AI-based analytics.
 
@@ -592,7 +592,7 @@ The default Streamlit URL is:
 
 http://localhost:8501
 
-18. Natural Language to SQL
+**18. Natural Language to SQL**
 
 The Text-to-SQL workflow allows a user to ask questions in English.
 
@@ -615,7 +615,7 @@ The generated SQL is then executed against Snowflake.
 
 The application returns the result to the user.
 
-19. Important Table Naming Rule for AI SQL
+**19. Important Table Naming Rule for AI SQL**
 
 AI-generated SQL must use the actual Snowflake object names and schemas.
 
@@ -658,7 +658,7 @@ ORDER BY TABLE_SCHEMA, TABLE_NAME;
 
 The Streamlit application should use the actual fully qualified table names where appropriate.
 
-20. RAG / AI Analytics Architecture
+**20. RAG / AI Analytics Architecture**
 
 Conceptually:
 
@@ -688,7 +688,7 @@ User
 
 For a RAG-style workflow, relevant schema/data context is supplied to the language model so that the generated answer is grounded in the available Zomato data.
 
-21. Useful Snowflake Queries
+**21. Useful Snowflake Queries**
 
 Check RAW tables
 
@@ -717,7 +717,7 @@ SELECT *
 FROM ZOMATO.RAW.REVIEWS
 LIMIT 10;
 
-22. dbt Documentation
+**22. dbt Documentation**
 
 Generate dbt documentation:
 
@@ -739,7 +739,7 @@ Model metadata
 
 The lineage should show relationships between raw sources, staging models, dimensions, facts, marts, and AI models.
 
-23. Troubleshooting
+**23. Troubleshooting**
 
 Problem: Could not find profile named 'zomato'
 
@@ -821,7 +821,7 @@ and:
 
 docker compose ps
 
-24. Recommended Startup Sequence
+**24. Recommended Startup Sequence**
 
 For a fresh development session:
 
@@ -874,7 +874,7 @@ Open:
 
 http://localhost:8501
 
-25. Development Workflow
+**25. Development Workflow**
 
 A typical development workflow is:
 
@@ -900,7 +900,7 @@ A typical development workflow is:
           ↓
 11. Monitor pipeline
 
-26. Validation Checklist
+**26. Validation Checklist**
 
 Before considering the pipeline successful, verify:
 
@@ -978,7 +978,7 @@ Generated SQL uses valid table/schema names
 
 Query results are displayed
 
-27. Security
+**27. Security**
 
 Never commit credentials.
 
@@ -1006,7 +1006,7 @@ Use environment variables or a secure secrets manager.
 
 If a secret has accidentally been exposed, revoke/rotate it immediately.
 
-28. Future Improvements
+**28. Future Improvements**
 
 Potential production enhancements include:
 
@@ -1048,7 +1048,7 @@ Role-based access control
 
 Production logging and observability
 
-29. Project Outcome
+**29. Project Outcome**
 
 This project demonstrates a complete modern data and AI pipeline:
 
@@ -1082,7 +1082,7 @@ This project demonstrates a complete modern data and AI pipeline:
 
 The result is an end-to-end platform that combines data engineering, cloud warehousing, transformation, orchestration, generative AI, and natural-language analytics in one project.
 
-30. Author
+**30. Author**
 
 Murali Krishna
 
